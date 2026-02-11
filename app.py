@@ -18,8 +18,18 @@ pytesseract.pytesseract.tesseract_cmd = '/usr/bin/tesseract'
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
 
-# ================== TESSERACT PATH ==================
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+
+# --- YE LOGIC YAHAN PASTE KAREIN ---
+if os.environ.get('RENDER'):
+    # Render (Linux/Docker) ka path
+    pytesseract.pytesseract.tesseract_cmd = '/usr/bin/tesseract'
+else:
+    # Aapka local Windows path
+    pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+# ----------------------------------
+
+# # ================== TESSERACT PATH ==================
+# pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
 # ================== WEIGHTED RULE ENGINE ==================
 SCAM_WEIGHTS = {

@@ -6,6 +6,14 @@ import re
 from PIL import Image
 import pytesseract
 
+# app.py mein ye line update karein
+import pytesseract
+import os
+
+# Docker environment mein tesseract yahan hota hai
+pytesseract.pytesseract.tesseract_cmd = '/usr/bin/tesseract'
+
+
 # ================== APP SETUP ==================
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})

@@ -20,8 +20,8 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 
 
 # --- YE LOGIC YAHAN PASTE KAREIN ---
-if os.environ.get('RENDER'):
-    # Render (Linux/Docker) ka path
+if os.environ.get('RENDER') or os.environ.get('RAILWAY_ENVIRONMENT') or os.path.exists('/usr/bin/tesseract'):
+    # Linux (Render/Railway/Docker) ka path
     pytesseract.pytesseract.tesseract_cmd = '/usr/bin/tesseract'
 else:
     # Aapka local Windows path
@@ -293,9 +293,9 @@ def build_suggested_replies(text: str, risk: str):
 
 
 # ================== ROUTES ==================
-@app.get("/health")
-def health():
-    return {"ok": True, "message": "DateShield backend alive 🚩"}
+@app.route('/')
+def health_check():
+    return jsonify({"status": "online", "message": "DateShield Backend is Live on Railway!"}), 200
 
 @app.post("/scan")
 def scan():
